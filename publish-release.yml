@@ -1,0 +1,12 @@
+      - name: Upload to Curseforge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CF_API_TOKEN }}
+          project_id: 70886
+          game_endpoint: minecraft
+          file_path: build/libs/${{ steps.findjar.outputs.jarname }}
+          changelog_type: markdown
+          changelog: ${{ github.event.release.body }}
+          display_name: OffersHUD v${{ needs.Get-Properties.outputs.mod-version }} for ${{ steps.getbranchinfo.outputs.version }}
+          game_versions: 8203,${{ steps.getbranchinfo.outputs.curse-versions }} #Forge,Java 8,[version (s) for the branch]
+          release_type: ${{ needs.Get-Properties.outputs.release-type }}
